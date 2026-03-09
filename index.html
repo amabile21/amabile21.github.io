@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amabile Antunes — Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blush: #f4ddd8;
+      --rose: #d4857a;
+      --dusty: #b5746a;
+      --cream: #fdf8f5;
+      --warm-white: #fff9f7;
+      --text: #2a1f1d;
+      --muted: #8a6e6b;
+      --line: #e8d4d0;
+      --accent: #c96d62;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Decorative background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(244,221,216,0.5) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -150px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212,133,122,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(253,248,245,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-content { flex: 1; }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.35s forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .hero-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.6);
+      letter-spacing: 0.03em;
+    }
+
+    .contact-chip:hover {
+      border-color: var(--rose);
+      color: var(--accent);
+      background: rgba(212,133,122,0.06);
+    }
+
+    .hero-deco {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: 340px;
+      opacity: 0;
+      animation: fadeIn 1.2s ease 0.9s forwards;
+    }
+
+    .hero-deco svg { width: 100%; height: 100%; }
+
+    /* Section styles */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--rose);
+    }
+
+    .section-label span {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 3rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* Divider */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Education */
+    .edu-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .edu-detail h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-detail .institution {
+      font-size: 0.82rem;
+      color: var(--rose);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-detail p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .edu-tag {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--blush);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      color: var(--dusty);
+      margin-top: 1rem;
+    }
+
+    /* Experience */
+    .exp-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta { }
+
+    .exp-meta .company {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-meta .period {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .exp-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+
+    .exp-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .exp-content ul li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .exp-content ul li::before {
+      content: '—';
+      color: var(--rose);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* Skills */
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .skill-group h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-tag {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.5);
+      transition: all 0.25s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--rose);
+      color: var(--accent);
+      background: rgba(212,133,122,0.05);
+    }
+
+    .skill-tag.highlight {
+      background: var(--blush);
+      border-color: transparent;
+      color: var(--dusty);
+    }
+
+    /* Courses */
+    .courses-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .course-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.5);
+      transition: all 0.3s;
+    }
+
+    .course-item:hover {
+      border-color: var(--rose);
+      background: rgba(244,221,216,0.2);
+      transform: translateX(4px);
+    }
+
+    .course-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rose);
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+    }
+
+    .course-name {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .course-org {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      padding: 2rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.4);
+      transition: all 0.3s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      border-color: var(--rose);
+      background: rgba(244,221,216,0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(201,109,98,0.1);
+    }
+
+    .project-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .stack-tag {
+      padding: 0.2rem 0.6rem;
+      background: var(--blush);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: var(--dusty);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-heart {
+      color: var(--rose);
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-deco { display: none; }
+      .edu-card { grid-template-columns: 1fr; gap: 1.5rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#" class="nav-logo">Amabile Antunes</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero" id="sobre">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Disponível para estágio</p>
+      <h1 class="hero-name">Amabile<br /><em>Antunes</em></h1>
+      <p class="hero-title">Desenvolvedora Backend em formação</p>
+      <p class="hero-desc">
+        Estudante de Análise e Desenvolvimento de Sistemas com foco em Java e desenvolvimento backend. Apaixonada por resolver problemas reais com código limpo e lógica bem estruturada.
+      </p>
+      <div class="hero-contacts">
+        <a href="mailto:amabiletalia@gmail.com" class="contact-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          amabiletalia@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/amabileantunes/" target="_blank" class="contact-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/amabile21" target="_blank" class="contact-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <span class="contact-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Rio do Sul — SC
+        </span>
+      </div>
+    </div>
+
+    <!-- Decorative SVG -->
+    <div class="hero-deco" aria-hidden="true">
+      <svg viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="170" cy="170" r="140" stroke="#f4ddd8" stroke-width="1"/>
+        <circle cx="170" cy="170" r="110" stroke="#e8d4d0" stroke-width="0.5"/>
+        <circle cx="170" cy="170" r="80" stroke="#d4857a" stroke-width="0.5" opacity="0.4"/>
+        <!-- Floating petals -->
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7" transform="rotate(45 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7" transform="rotate(90 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7" transform="rotate(135 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.5" transform="rotate(180 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.5" transform="rotate(225 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.5" transform="rotate(270 170 170)"/>
+        <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.5" transform="rotate(315 170 170)"/>
+        <circle cx="170" cy="170" r="20" fill="#d4857a" opacity="0.25"/>
+        <circle cx="170" cy="170" r="8" fill="#d4857a" opacity="0.5"/>
+        <!-- small dots -->
+        <circle cx="82" cy="100" r="3" fill="#d4857a" opacity="0.3"/>
+        <circle cx="258" cy="100" r="3" fill="#d4857a" opacity="0.3"/>
+        <circle cx="60" cy="200" r="2" fill="#d4857a" opacity="0.2"/>
+        <circle cx="280" cy="220" r="4" fill="#f4ddd8" opacity="0.6"/>
+        <circle cx="120" cy="280" r="2.5" fill="#d4857a" opacity="0.25"/>
+        <circle cx="240" cy="270" r="2" fill="#d4857a" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Formação -->
+  <section id="formacao">
+    <div class="section-label reveal"><span>Formação</span></div>
+    <div class="edu-card reveal">
+      <div>
+        <h2 class="section-title">Educação &amp;<br /><em>aprendizado</em></h2>
+      </div>
+      <div class="edu-detail">
+        <h3>Tecnólogo em Análise e Desenvolvimento de Sistemas</h3>
+        <p class="institution">Uniasselvi</p>
+        <p>4º semestre em andamento — conclusão prevista em Dezembro de 2026.</p>
+        <span class="edu-tag">Em andamento</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Experiências -->
+  <section id="experiencia">
+    <div class="section-label reveal"><span>Experiência</span></div>
+    <h2 class="section-title reveal">Onde já<br /><em>estive</em></h2>
+
+    <div class="exp-grid">
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="company">Gráfica Self</p>
+          <p class="period">1 ano e 8 meses</p>
+        </div>
+        <div class="exp-content">
+          <h3>Auxiliar Geral — Produção</h3>
+          <ul>
+            <li>Apoio ao controle de qualidade e verificação de padrões</li>
+            <li>Participação na criação de um Sistema de Controle de Entregas</li>
+            <li>Criação de planilha para automação de cálculos para orçamentos</li>
+            <li>Suporte operacional à produção e acompanhamento de entregas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="company">Lanchonetes &amp; FoodTrucks</p>
+          <p class="period">2 anos</p>
+        </div>
+        <div class="exp-content">
+          <h3>Atendimento ao Público</h3>
+          <ul>
+            <li>Resolução de problemas sob pressão</li>
+            <li>Comunicação clara e objetiva</li>
+            <li>Organização de fluxo de demandas</li>
+            <li>Operação de caixa e controle de valores</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-label reveal"><span>Habilidades</span></div>
+    <h2 class="section-title reveal">O que eu<br /><em>trago</em></h2>
+
+    <div class="skills-layout reveal">
+      <div class="skill-group">
+        <h3>Técnicas</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Java</span>
+          <span class="skill-tag highlight">Spring Boot</span>
+          <span class="skill-tag highlight">POO</span>
+          <span class="skill-tag highlight">SQL</span>
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">HTML &amp; CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Git &amp; GitHub</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">Metodologias Ágeis</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Interpessoais</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Organização</span>
+          <span class="skill-tag">Atenção a detalhes</span>
+          <span class="skill-tag">Boa comunicação</span>
+          <span class="skill-tag">Proatividade</span>
+          <span class="skill-tag">Adaptação rápida</span>
+          <span class="skill-tag">Flexibilidade</span>
+          <span class="skill-tag">Inglês Intermediário</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Cursos -->
+  <section id="cursos">
+    <div class="section-label reveal"><span>Cursos</span></div>
+    <h2 class="section-title reveal">Sempre<br /><em>aprendendo</em></h2>
+
+    <div class="courses-list reveal">
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
+          <p class="course-name">Desenvolvedor Back-end — Java</p>
+          <p class="course-org">ENTRA21 / SENAI · em andamento</p>
+        </div>
+      </div>
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
+          <p class="course-name">Introdução a Spring Framework com Spring Boot</p>
+          <p class="course-org">DIO · 2025</p>
+        </div>
+      </div>
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
+          <p class="course-name">Introdução ao Desenvolvimento de API</p>
+          <p class="course-org">DIO · 2025</p>
+        </div>
+      </div>
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
+          <p class="course-name">Versionamento com Git e GitHub</p>
+          <p class="course-org">DIO · 2024</p>
+        </div>
+      </div>
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
+          <p class="course-name">Inglês Intermediário</p>
+          <p class="course-org">CNA · 2023</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Projetos -->
+  <section id="projetos">
+    <div class="section-label reveal"><span>Projetos</span></div>
+    <h2 class="section-title reveal">O que eu<br /><em>construí</em></h2>
+
+    <div class="projects-grid">
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto acadêmico · Web</p>
+        <h3 class="project-name">Site Conselho Tutelar de Indaial</h3>
+        <p class="project-desc">Ciclo completo de desenvolvimento: levantamento de requisitos junto ao cliente, prototipação no Figma e deploy via Netlify.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Figma</span>
+          <span class="stack-tag">Netlify</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto de equipe · Sistema</p>
+        <h3 class="project-name">Sistema de Controle de Entregas</h3>
+        <p class="project-desc">Atuação nas fases de análise, levantamento de requisitos, validação funcional e treinamento de usuários finais.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Python</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto pessoal · Backend</p>
+        <h3 class="project-name">Site Sorteador de Exercícios</h3>
+        <p class="project-desc">Primeiro contato com lógica de servidor — geração aleatória de exercícios com processamento backend em PHP.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">PHP</span>
+          <span class="stack-tag">XAMPP</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto pessoal · Web</p>
+        <h3 class="project-name">Site Lista de Tarefas</h3>
+        <p class="project-desc">Aplicação simples para gerenciamento de tarefas com deploy via Netlify.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Netlify</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">CLI · Java</p>
+        <h3 class="project-name">Simulador de Pedidos</h3>
+        <p class="project-desc">Aplicação de linha de comando explorando POO e estruturas de dados em Java.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">POO</span>
+          <span class="stack-tag">CLI</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">CLI · Java</p>
+        <h3 class="project-name">Simulador de Cadastro de Produtos</h3>
+        <p class="project-desc">Aplicação de linha de comando com estruturas de controle em Java.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">Estruturas de Controle</span>
+          <span class="stack-tag">CLI</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contato">
+    <p class="footer-name">Amabile Antunes · Rio do Sul, SC</p>
+    <a href="mailto:amabiletalia@gmail.com" class="footer-heart">amabiletalia@gmail.com ♡</a>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = `${(i % 3) * 0.1}s`;
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
