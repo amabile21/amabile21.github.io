@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amabile Antunes — Backend Developer</title>
+  <title>Portfólio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -33,7 +33,6 @@
       overflow-x: hidden;
     }
 
-    /* Decorative background */
     body::before {
       content: '';
       position: fixed;
@@ -58,12 +57,9 @@
       z-index: 0;
     }
 
-    /* Nav */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 1.5rem 3rem;
       display: flex;
@@ -100,7 +96,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -203,7 +198,6 @@
 
     .hero-deco svg { width: 100%; height: 100%; }
 
-    /* Section styles */
     section {
       max-width: 1100px;
       margin: 0 auto;
@@ -244,7 +238,6 @@
 
     .section-title em { font-style: italic; color: var(--accent); }
 
-    /* Divider */
     .divider {
       width: 100%;
       height: 1px;
@@ -253,7 +246,6 @@
       margin: 0 auto;
     }
 
-    /* Education */
     .edu-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -291,11 +283,7 @@
       margin-top: 1rem;
     }
 
-    /* Experience */
-    .exp-grid {
-      display: grid;
-      gap: 2rem;
-    }
+    .exp-grid { display: grid; gap: 2rem; }
 
     .exp-item {
       display: grid;
@@ -306,8 +294,6 @@
     }
 
     .exp-item:last-child { border-bottom: none; }
-
-    .exp-meta { }
 
     .exp-meta .company {
       font-size: 0.78rem;
@@ -351,7 +337,6 @@
       margin-top: 0.05rem;
     }
 
-    /* Skills */
     .skills-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -366,11 +351,7 @@
       color: var(--text);
     }
 
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 
     .skill-tag {
       padding: 0.4rem 1rem;
@@ -394,11 +375,7 @@
       color: var(--dusty);
     }
 
-    /* Courses */
-    .courses-list {
-      display: grid;
-      gap: 1rem;
-    }
+    .courses-list { display: grid; gap: 1rem; }
 
     .course-item {
       display: flex;
@@ -433,12 +410,8 @@
       margin-bottom: 0.2rem;
     }
 
-    .course-org {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    .course-org { font-size: 0.75rem; color: var(--muted); }
 
-    /* Projects */
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -485,11 +458,7 @@
       margin-bottom: 1.2rem;
     }
 
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
     .stack-tag {
       padding: 0.2rem 0.6rem;
@@ -499,7 +468,6 @@
       color: var(--dusty);
     }
 
-    /* Footer */
     footer {
       border-top: 1px solid var(--line);
       padding: 3rem;
@@ -521,9 +489,9 @@
       font-size: 0.8rem;
       margin-top: 0.5rem;
       display: block;
+      text-decoration: none;
     }
 
-    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -545,7 +513,6 @@
       transform: translateY(0);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
@@ -562,7 +529,6 @@
 </head>
 <body>
 
-  <!-- Nav -->
   <nav>
     <a href="#" class="nav-logo">Amabile Antunes</a>
     <ul class="nav-links">
@@ -573,7 +539,6 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
   <div class="hero" id="sobre">
     <div class="hero-content">
       <p class="hero-eyebrow">Disponível para estágio</p>
@@ -602,13 +567,11 @@
       </div>
     </div>
 
-    <!-- Decorative SVG -->
     <div class="hero-deco" aria-hidden="true">
       <svg viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="170" cy="170" r="140" stroke="#f4ddd8" stroke-width="1"/>
         <circle cx="170" cy="170" r="110" stroke="#e8d4d0" stroke-width="0.5"/>
         <circle cx="170" cy="170" r="80" stroke="#d4857a" stroke-width="0.5" opacity="0.4"/>
-        <!-- Floating petals -->
         <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7"/>
         <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7" transform="rotate(45 170 170)"/>
         <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.7" transform="rotate(90 170 170)"/>
@@ -619,7 +582,6 @@
         <ellipse cx="170" cy="50" rx="14" ry="28" fill="#f4ddd8" opacity="0.5" transform="rotate(315 170 170)"/>
         <circle cx="170" cy="170" r="20" fill="#d4857a" opacity="0.25"/>
         <circle cx="170" cy="170" r="8" fill="#d4857a" opacity="0.5"/>
-        <!-- small dots -->
         <circle cx="82" cy="100" r="3" fill="#d4857a" opacity="0.3"/>
         <circle cx="258" cy="100" r="3" fill="#d4857a" opacity="0.3"/>
         <circle cx="60" cy="200" r="2" fill="#d4857a" opacity="0.2"/>
@@ -632,7 +594,6 @@
 
   <div class="divider"></div>
 
-  <!-- Formação -->
   <section id="formacao">
     <div class="section-label reveal"><span>Formação</span></div>
     <div class="edu-card reveal">
@@ -650,12 +611,28 @@
 
   <div class="divider"></div>
 
-  <!-- Experiências -->
   <section id="experiencia">
     <div class="section-label reveal"><span>Experiência</span></div>
     <h2 class="section-title reveal">Onde já<br /><em>estive</em></h2>
 
     <div class="exp-grid">
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="company">Uniasselvi · Extensão</p>
+          <p class="period">Projeto acadêmico</p>
+        </div>
+        <div class="exp-content">
+          <h3>Site Conselho Tutelar de Indaial <a href="https://conselho-tutelar-indaial.netlify.app" target="_blank" style="font-size:0.75rem; color:var(--rose); font-family:'DM Sans',sans-serif; font-weight:400; font-style:normal; margin-left:0.5rem; text-decoration:none; border-bottom: 1px solid var(--line);">ver site ↗</a></h3>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:0.8rem;">Projeto de extensão universitária desenvolvido em parceria direta com o Conselho Tutelar de Indaial–SC, com direcionamento real do cliente e aplicação do ciclo completo de desenvolvimento.</p>
+          <ul>
+            <li>Levantamento e documentação de requisitos junto ao Conselho Tutelar</li>
+            <li>Prototipação da interface no Figma (wireframes e layout final)</li>
+            <li>Desenvolvimento front-end com HTML, CSS e JavaScript</li>
+            <li>Validações, testes funcionais e deploy via Netlify</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="exp-item reveal">
         <div class="exp-meta">
           <p class="company">Gráfica Self</p>
@@ -692,7 +669,6 @@
 
   <div class="divider"></div>
 
-  <!-- Skills -->
   <section id="skills">
     <div class="section-label reveal"><span>Habilidades</span></div>
     <h2 class="section-title reveal">O que eu<br /><em>trago</em></h2>
@@ -701,11 +677,11 @@
       <div class="skill-group">
         <h3>Técnicas</h3>
         <div class="skill-tags">
+          <span class="skill-tag highlight">PHP</span>
           <span class="skill-tag highlight">Java</span>
           <span class="skill-tag highlight">Spring Boot</span>
           <span class="skill-tag highlight">POO</span>
-          <span class="skill-tag highlight">SQL</span>
-          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">SQL</span>
           <span class="skill-tag">HTML &amp; CSS</span>
           <span class="skill-tag">JavaScript</span>
           <span class="skill-tag">Git &amp; GitHub</span>
@@ -732,7 +708,6 @@
 
   <div class="divider"></div>
 
-  <!-- Cursos -->
   <section id="cursos">
     <div class="section-label reveal"><span>Cursos</span></div>
     <h2 class="section-title reveal">Sempre<br /><em>aprendendo</em></h2>
@@ -741,8 +716,15 @@
       <div class="course-item">
         <div class="course-dot"></div>
         <div>
+          <p class="course-name">PHP do Zero à Maestria — PHP</p>
+          <p class="course-org">Udemy · Em andamento</p>
+        </div>
+      </div>
+      <div class="course-item">
+        <div class="course-dot"></div>
+        <div>
           <p class="course-name">Desenvolvedor Back-end — Java</p>
-          <p class="course-org">ENTRA21 / SENAI · em andamento</p>
+          <p class="course-org">ENTRA21 / SENAI · 2025</p>
         </div>
       </div>
       <div class="course-item">
@@ -778,38 +760,24 @@
 
   <div class="divider"></div>
 
-  <!-- Projetos -->
   <section id="projetos">
     <div class="section-label reveal"><span>Projetos</span></div>
     <h2 class="section-title reveal">O que eu<br /><em>construí</em></h2>
 
     <div class="projects-grid">
-      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
-        <p class="project-type">Projeto acadêmico · Web</p>
-        <h3 class="project-name">Site Conselho Tutelar de Indaial</h3>
-        <p class="project-desc">Ciclo completo de desenvolvimento: levantamento de requisitos junto ao cliente, prototipação no Figma e deploy via Netlify.</p>
+      <a href="https://amabile21-listatarefas.netlify.app/" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto pessoal · Web</p>
+        <h3 class="project-name">Site Lista de Tarefas</h3>
+        <p class="project-desc">Aplicação simples para gerenciamento de tarefas com deploy via Netlify.</p>
         <div class="project-stack">
           <span class="stack-tag">HTML</span>
           <span class="stack-tag">CSS</span>
           <span class="stack-tag">JavaScript</span>
-          <span class="stack-tag">Figma</span>
           <span class="stack-tag">Netlify</span>
         </div>
       </a>
 
-      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
-        <p class="project-type">Projeto de equipe · Sistema</p>
-        <h3 class="project-name">Sistema de Controle de Entregas</h3>
-        <p class="project-desc">Atuação nas fases de análise, levantamento de requisitos, validação funcional e treinamento de usuários finais.</p>
-        <div class="project-stack">
-          <span class="stack-tag">HTML</span>
-          <span class="stack-tag">CSS</span>
-          <span class="stack-tag">JavaScript</span>
-          <span class="stack-tag">Python</span>
-        </div>
-      </a>
-
-      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+      <a href="https://github.com/amabile21/Site-Sorteador-de-Exercicios" target="_blank" class="project-card reveal">
         <p class="project-type">Projeto pessoal · Backend</p>
         <h3 class="project-name">Site Sorteador de Exercícios</h3>
         <p class="project-desc">Primeiro contato com lógica de servidor — geração aleatória de exercícios com processamento backend em PHP.</p>
@@ -821,17 +789,6 @@
         </div>
       </a>
 
-      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
-        <p class="project-type">Projeto pessoal · Web</p>
-        <h3 class="project-name">Site Lista de Tarefas</h3>
-        <p class="project-desc">Aplicação simples para gerenciamento de tarefas com deploy via Netlify.</p>
-        <div class="project-stack">
-          <span class="stack-tag">HTML</span>
-          <span class="stack-tag">CSS</span>
-          <span class="stack-tag">JavaScript</span>
-          <span class="stack-tag">Netlify</span>
-        </div>
-      </a>
 
       <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
         <p class="project-type">CLI · Java</p>
@@ -854,17 +811,27 @@
           <span class="stack-tag">CLI</span>
         </div>
       </a>
+
+      <a href="https://github.com/amabile21" target="_blank" class="project-card reveal">
+        <p class="project-type">Projeto de equipe · Sistema</p>
+        <h3 class="project-name">Sistema de Controle de Entregas</h3>
+        <p class="project-desc">Atuação nas fases de análise, levantamento de requisitos, validação funcional e treinamento de usuários finais.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Python</span>
+        </div>
+      </a>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer id="contato">
     <p class="footer-name">Amabile Antunes · Rio do Sul, SC</p>
-    <a href="mailto:amabiletalia@gmail.com" class="footer-heart">amabiletalia@gmail.com ♡</a>
+    <a href="mailto:amabiletalia@gmail.com" class="footer-heart">amabiletalia@gmail.com ❤️</a>
   </footer>
 
   <script>
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
